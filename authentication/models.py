@@ -10,9 +10,9 @@ class User(AbstractBaseUser):
     username = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
-    email = models.EmailField(max_length=255, blank=True)
+    email = models.EmailField(max_length=255)
     address = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=12)
+    phone_number = models.CharField(max_length=12, blank=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

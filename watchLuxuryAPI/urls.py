@@ -3,7 +3,7 @@ from django.urls import path
 
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from authentication.views import RegisterView, LoginView
+from authentication.views import RegisterView, LoginView, UserView
 
 urlpatterns = [
     path('admin/', admin.site.urls),

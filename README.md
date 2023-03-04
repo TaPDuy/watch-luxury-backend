@@ -15,8 +15,8 @@
 |URI            |Method |Action              |
 |---------------|-------|--------------------|
 |/login         |POST   |Đăng nhập           |
+|/register      |POST   |Đăng ký             |
 |/users         |GET    |Lấy tất cả tài khoản|
-|/users         |POST   |Tạo tài khoản mới   |
 |/users/{id}    |GET    |Lấy 1 tài khoản     |
 |/users/{id}    |PUT    |Cập nhật 1 tài khoản|
 |/products      |GET    |Lấy tất cả item     |
