@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .serializers import UserSerializer, LoginSerializer
+from .models import User
 
 
 class LoginView(TokenObtainPairView):
@@ -24,3 +25,11 @@ class RegisterView(APIView):
             return Response({
                 'error_msg': 'Something went wrong!'
             }, status=status.HTTP_400_BAD_REQUEST)
+        
+
+class UserView(APIView):
+
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
