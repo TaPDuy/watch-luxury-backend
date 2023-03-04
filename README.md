@@ -14,6 +14,7 @@
 
 |URI            |Method |Action              |
 |---------------|-------|--------------------|
+|/login         |POST   |Đăng nhập           |
 |/users         |GET    |Lấy tất cả tài khoản|
 |/users         |POST   |Tạo tài khoản mới   |
 |/users/{id}    |GET    |Lấy 1 tài khoản     |
