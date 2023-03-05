@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -10,10 +11,13 @@ from .models import User
 
 
 class LoginView(TokenObtainPairView):
+    permission_classes = (AllowAny, )
+
     serializer_class = LoginSerializer
 
 
 class RegisterView(APIView):
+    permission_classes = (AllowAny, )
 
     def post(self, request):
         serializer = UserSerializer(data=request.data)
@@ -28,6 +32,7 @@ class RegisterView(APIView):
         
 
 class UserView(APIView):
+    permission_classes = (IsAuthenticated, )
 
     def get(self, request):
         users = User.objects.all()
