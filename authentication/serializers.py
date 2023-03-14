@@ -29,3 +29,12 @@ class UserSerializer(serializers.ModelSerializer):
             'last_login', 'date_joined'
         )
         extra_kwargs = {'password': {'write_only': True}}
+
+class UserUpdateSerializer(UserSerializer):
+
+    class Meta:
+        model = User
+        fields = (
+            'first_name', 'last_name',
+            'email', 'address', 'phone_number'
+        )
