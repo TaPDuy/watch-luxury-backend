@@ -38,3 +38,16 @@ class UserUpdateSerializer(UserSerializer):
             'first_name', 'last_name',
             'email', 'address', 'phone_number'
         )
+
+class ChangePasswordSerializer(serializers.Serializer):
+
+    old_password = serializers.CharField(write_only=True)
+    new_password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+
+    def update(self, instance, validated_data):
+        instance.set_password(validated_data['new_password'])
+        instance.save()
+        return instance
