@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'authentication',
+    'users',
 
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
@@ -51,7 +52,6 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = { 
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated', 
         'rest_framework.permissions.AllowAny'
     ), 
     'DEFAULT_AUTHENTICATION_CLASSES': ( 
@@ -144,7 +144,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
-AUTH_USER_MODEL = "authentication.User"
+AUTH_USER_MODEL = "users.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
