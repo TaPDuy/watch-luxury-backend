@@ -8,7 +8,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -26,8 +26,24 @@ from .utils import EmailUtil
 
 class LoginView(TokenObtainPairView):
     permission_classes = (AllowAny, )
-
     serializer_class = LoginSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except Exception:
+            return Response({
+                'code': rescode.API_INVALID_LOGIN,
+                'msg': 'Invalid login info',
+            }, status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response({
+            'code': rescode.API_SUCCESS,
+            'msg': 'User authenticated',
+            'data': serializer.validated_data,
+        }, status=status.HTTP_200_OK)
 
 
 class RegisterView(APIView):
@@ -49,10 +65,15 @@ class RegisterView(APIView):
                 user.email
             )
 
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({
+                'code': rescode.API_SUCCESS,
+                'msg': f'Created user',
+                'data': serializer.data
+            }, status=status.HTTP_201_CREATED)
         else:
             return Response({
-                'error_msg': 'Something went wrong!'
+                'code': rescode.API_GENERIC_ERROR,
+                'msg': 'Request failed',
             }, status=status.HTTP_400_BAD_REQUEST)
         
 
@@ -79,18 +100,29 @@ class VerifyEmailView(APIView):
             return Response({"msg": "Invalid activation link."}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET', ])
+@permission_classes([IsAdminUser, ])
+def get_users(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response({
+        'code': rescode.API_SUCCESS,
+        'msg': f'Retrived {len(users)} user(s)',
+        'data': serializer.data
+    }, status=status.HTTP_200_OK)
+
+
 class UserView(APIView):
     permission_classes = (IsAuthenticated, )
-
-    def get(self, request):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def get(self, request, id):
         user = User.objects.get(pk=id)
         serializer = UserSerializer(user)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({
+            'code': rescode.API_SUCCESS,
+            'msg': f'Retrived user',
+            'data': serializer.data
+        }, status=status.HTTP_200_OK)
     
     def put(self, request, id):
         print(request.data)
@@ -99,10 +131,17 @@ class UserView(APIView):
         serializer = UserUpdateSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_206_PARTIAL_CONTENT)
+            return Response({
+                'code': rescode.API_SUCCESS,
+                'msg': f'Updated user',
+                'data': serializer.data
+            }, status=status.HTTP_200_OK)
         
         print(serializer.errors)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'code': rescode.API_GENERIC_ERROR,
+            'msg': 'Request failed',
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT', ])
