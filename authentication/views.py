@@ -29,7 +29,7 @@ class LoginView(TokenObtainPairView):
         serializer = self.get_serializer(data=request.data)
 
         try:
-            serializer.is_valid(raise_exception=True)
+            serializer.is_valid()
         except Exception:
             return Response({
                 'code': rescode.API_INVALID_LOGIN,
@@ -48,7 +48,7 @@ class RegisterView(APIView):
 
     def post(self, request):
         serializer = UserSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid():
             user = serializer.save()
 
             token = RefreshToken.for_user(user).access_token
