@@ -68,6 +68,8 @@ class RegisterView(APIView):
     permission_classes = (AllowAny, )
 
     def post(self, request):
+        print(request.data)
+
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
@@ -88,12 +90,12 @@ class RegisterView(APIView):
                 'msg': f'Created user',
                 'data': serializer.data
             }, status=status.HTTP_201_CREATED)
-        else:
-            return Response({
-                'code': rescode.API_GENERIC_ERROR,
-                'msg': 'Request failed',
-            }, status=status.HTTP_400_BAD_REQUEST)
-        
+
+        print(serializer.errors)
+        return Response({
+            'code': rescode.API_GENERIC_ERROR,
+            'msg': 'Request failed',
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class VerifyEmailView(APIView):
