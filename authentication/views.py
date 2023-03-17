@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from watchLuxuryAPI.settings import SECRET_KEY, SIMPLE_JWT
 from watchLuxuryAPI.utils import response_code as rescode
@@ -39,6 +39,27 @@ class LoginView(TokenObtainPairView):
         return Response({
             'code': rescode.API_SUCCESS,
             'msg': 'User authenticated',
+            'data': serializer.validated_data,
+        }, status=status.HTTP_200_OK)
+    
+
+class RefreshView(TokenRefreshView):
+    permission_classes = (AllowAny, )
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+
+        try:
+            serializer.is_valid()
+        except Exception:
+            return Response({
+                'code': rescode.API_GENERIC_ERROR,
+                'msg': 'Request failed',
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({
+            'code': rescode.API_SUCCESS,
+            'msg': 'Access token refreshed',
             'data': serializer.validated_data,
         }, status=status.HTTP_200_OK)
 
