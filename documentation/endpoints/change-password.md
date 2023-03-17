@@ -5,6 +5,7 @@ Update (PUT) the password of the user account with the specified **`{id}`**.
 
 - Methods: PUT
 - Permissions: Authenticated 
+- Response codes: API_SUCCESS, API_WRONG_PASSWORD, API_GENERIC_ERROR
 
 ## Request
 

@@ -5,6 +5,7 @@ Refresh access tokens.
 
 - Methods: POST
 - Permissions: Any
+- Response codes: API_SUCCESS, API_GENERIC_ERROR
 
 ## Request
 

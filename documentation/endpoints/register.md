@@ -5,6 +5,7 @@ Create a new account. Activation link is sent to the registered user's email.
 
 - Methods: POST
 - Permissions: Any
+- Response codes: API_SUCCESS, API_GENERIC_ERROR
 
 ## Request
 

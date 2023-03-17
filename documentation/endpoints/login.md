@@ -5,6 +5,7 @@ Login and receive access tokens.
 
 - Methods: POST
 - Permissions: Any
+- Response codes: API_SUCCESS, API_INVALID_LOGIN
 
 ## Request
 

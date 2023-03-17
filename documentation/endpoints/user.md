@@ -5,6 +5,7 @@ Retrieve (GET) or update (PUT) user account with the specified **`{id}`**.
 
 - Methods: GET, PUT
 - Permissions: Authenticated + Read-only
+- Response codes: API_SUCCESS, API_GENERIC_ERROR, 400 (HTTP-GET)
 
 ## Request
 

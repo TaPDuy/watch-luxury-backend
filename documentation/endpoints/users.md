@@ -5,6 +5,7 @@ Retrieve all registered user accounts' details.
 
 - Methods: GET
 - Permissions: Authenticated + Read-only
+- Response codes: API_SUCCESS, 400 (HTTP)
 
 ## Response data
 
