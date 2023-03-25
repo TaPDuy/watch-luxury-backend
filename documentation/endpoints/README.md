@@ -11,8 +11,8 @@ Endpoints
 | [/users/{id}/](user.md)                            |  GET   | Lấy 1 tài khoản      |
 | [/users/{id}/](user.md)                            |  PUT   | Cập nhật 1 tài khoản |
 | [/users/{id}/change_password/](change-password.md) |  PUT   | Đổi mật khẩu         |
-| /products                                          |  GET   | Lấy tất cả item      |
-| /products/{id}                                     |  GET   | Lấy 1 item           |
+| [/products/](products.md)                          |  GET   | Lấy tất cả item      |
+| [/products/{id}/](product.md)                      |  GET   | Lấy 1 item           |
 | /orders                                            |  POST  | Tạo 1 order          |
 
 ## Response
