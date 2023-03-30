@@ -5,7 +5,12 @@ Retrieve all products.
 
 - Methods: GET
 - Permissions: Authenticated + Read-only
-- Response codes: API_SUCCESS, 400 (HTTP)
+- Response codes: API_SUCCESS
+
+## Filters
+| Name     | Type   | Action                           |
+| -------- | ------ | -------------------------------- |
+| category | String | Lấy tất cả item thuộc 1 category |
 
 ## Response data
 

@@ -13,6 +13,7 @@ Endpoints
 | [/users/{id}/change_password/](change-password.md) |  PUT   | Đổi mật khẩu         |
 | [/products/](products.md)                          |  GET   | Lấy tất cả item      |
 | [/products/{id}/](product.md)                      |  GET   | Lấy 1 item           |
+| [/products/categories/](categories.md)             |  GET   | Lấy tất cả category  |
 | /orders                                            |  POST  | Tạo 1 order          |
 
 ## Response
