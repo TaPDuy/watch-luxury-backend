@@ -22,8 +22,14 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
 
+    products = serializers.SerializerMethodField("get_preview_products")
+
     class Meta:
         model = Category
         fields = (
-            'id', 'slug', 'name', 'description'
+            'id', 'slug', 'name', 'description', 'products'
         )
+
+    def get_preview_products(self, obj):
+        result_set = obj.product_set.all()[:5]
+        return ProductSerializer(result_set, many=True, read_only=True).data
