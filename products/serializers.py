@@ -31,5 +31,5 @@ class CategorySerializer(serializers.ModelSerializer):
         )
 
     def get_preview_products(self, obj):
-        result_set = obj.product_set.all()[:5]
+        result_set = obj.product_set.all().order_by('-price')[:7]
         return ProductSerializer(result_set, many=True, read_only=True).data

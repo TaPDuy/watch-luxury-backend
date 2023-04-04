@@ -1,10 +1,11 @@
 from django.core.exceptions import ObjectDoesNotExist
 
-from rest_framework import status
+from rest_framework import status, filters
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.generics import GenericAPIView
 
 from watchLuxuryAPI.utils import response_code as rescode
 
@@ -25,11 +26,13 @@ class ProductView(APIView):
         }, status=status.HTTP_200_OK)
 
 
-class ProductsView(APIView):
+class ProductsView(GenericAPIView):
     permission_classes = (IsAuthenticatedOrReadOnly, )
+    filter_backends = (filters.SearchFilter, )
+    search_fields = ('name', 'brand', )
 
     def get(self, request):
-        products = self.get_queryset()
+        products = self.filter_queryset(self.get_queryset())
         serializer = ProductSerializer(products, many=True)
         return Response({
             'code': rescode.API_SUCCESS,
