@@ -28,9 +28,10 @@ Endpoints
 
 ## Response code
 
-| Code  | Codename           | Meaning                  |
-| :---: | ------------------ | ------------------------ |
-|   0   | API_SUCCESS        | Xử lý request thành công |
-|  10   | API_GENERIC_ERROR  | Lỗi                      |
-|  11   | API_WRONG_PASSWORD | Sai mật khẩu             |
-|  12   | API_INVALID_LOGIN  | Sai thông tin đăng nhập  |
+| Code  | Codename           | Meaning                   |
+| :---: | ------------------ | ------------------------- |
+|   0   | API_SUCCESS        | Xử lý request thành công  |
+|  10   | API_GENERIC_ERROR  | Lỗi                       |
+|  11   | API_WRONG_PASSWORD | Sai mật khẩu              |
+|  12   | API_INVALID_LOGIN  | Sai thông tin đăng nhập   |
+|  13   | API_NOT_FOUND      | Không tìm thấy tài nguyên |
