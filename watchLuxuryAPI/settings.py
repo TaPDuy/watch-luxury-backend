@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'authentication',
     'users',
     'products',
+    'favorite',
 
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',

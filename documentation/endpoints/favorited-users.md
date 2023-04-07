@@ -1,16 +1,11 @@
-/products/
+/users/{id}/favorites/
 =======
 
-Retrieve all products.
+Retrieve (GET) user's favorited products.
 
 - Methods: GET
 - Permissions: Authenticated + Read-only
-- Response codes: API_SUCCESS
-
-## Filters
-| Name     | Type   | Action                           |
-| -------- | ------ | -------------------------------- |
-| category | String | Lấy tất cả item thuộc 1 category |
+- Response codes: API_SUCCESS, API_GENERIC_ERROR, 400 (HTTP-GET)
 
 ## Response data
 
@@ -33,5 +28,3 @@ Retrieve all products.
     ...
 ]
 ```
-
-</details>

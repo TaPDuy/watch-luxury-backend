@@ -4,6 +4,9 @@ from django.utils import timezone
 
 from authentication.managers import UserManager
 
+from products.models import Product
+from favorite.models import Favorite
+
 
 class User(AbstractBaseUser):
 
@@ -14,6 +17,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(max_length=255)
     address = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=12, blank=True)
+    favorites = models.ManyToManyField(Product, through=Favorite, related_name='favorited_by')
 
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)

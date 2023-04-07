@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from .models import Product, Category
 
+
 class ProductSerializer(serializers.ModelSerializer):
 
     categories = serializers.SlugRelatedField(
@@ -9,15 +10,20 @@ class ProductSerializer(serializers.ModelSerializer):
         read_only=True,
         slug_field='slug'
     )
+    favorites = serializers.SerializerMethodField("get_favorites_count")
 
     class Meta:
         model = Product
         fields = (
             'id', 'name', 'description',
             'price', 'brand', 'image',
+            'favorites',
             'categories',
             'time_added', 'time_updated'
         )
+
+    def get_favorites_count(self, obj):
+        return obj.favorite_set.count() 
 
 
 class CategorySerializer(serializers.ModelSerializer):
