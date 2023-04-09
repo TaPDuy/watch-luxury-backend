@@ -1,4 +1,4 @@
-/favorite/
+/favorites/
 =======
 
 Retrieve (GET), add (PUT) or remove (DELETE) a favorite.
