@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.utils import IntegrityError
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -71,7 +72,13 @@ class FavoriteView(APIView):
         serializer = FavoriteSerializer(data=request.data)
 
         if serializer.is_valid():
-            serializer.save()
+            try:
+                serializer.save()
+            except IntegrityError:
+                return Response({
+                        'code': rescode.API_GENERIC_ERROR,
+                        'msg': "Already favorited",
+                    }, status=status.HTTP_400_BAD_REQUEST)
             return Response({
                 'code': rescode.API_SUCCESS,
                 'msg': 'Added to favorite',
@@ -116,7 +123,7 @@ class FavoriteView(APIView):
                 'code': rescode.API_SUCCESS,
                 'msg': 'Removed favorite',
                 'data': request.data,
-            }, status=status.HTTP_204_NO_CONTENT)
+            }, status=status.HTTP_200_OK)
         else:
             return Response({
                 'code': rescode.API_GENERIC_ERROR,
