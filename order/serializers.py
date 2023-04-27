@@ -12,7 +12,10 @@ class OrderReadonlySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ('user', 'products', 'total', 'status', 'time_added', )
+        fields = (
+            'user', 'name', 'phone_number', 'address',
+            'products', 'total', 'status', 'time_added', 
+        )
         read_only_fields = ('total', 'status', 'time_added', )
         depth = 1
 
