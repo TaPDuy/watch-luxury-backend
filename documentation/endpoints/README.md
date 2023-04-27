@@ -19,7 +19,8 @@ Endpoints
 | [/favorites/](favorite.md)                         |  GET   | Lấy tất cả lượt ưa thích              |
 | [/favorites/](favorite.md)                         |  POST  | Ưa thích sản phẩm                     |
 | [/favorites/](favorite.md)                         | DELETE | Bỏ ưa thích sản phẩm                  |
-| /orders                                            |  POST  | Tạo 1 order                           |
+| [/orders/](orders.md)                              |  GET   | Xem tất cả order                      |
+| [/orders/](orders.md)                              |  POST  | Tạo 1 order                           |
 
 ## Response
 
