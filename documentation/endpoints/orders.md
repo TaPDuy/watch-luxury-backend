@@ -20,7 +20,6 @@ Retrieve all orders or create an order.
 ```json
 "data": [
     {
-        "id": "<order id:int>",
         "user": "<order's owner's id:int>",
         "name": "<owner's name:string/optional>",
         "phone_number": "<owner's phone number:string/optional>",
