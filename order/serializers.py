@@ -27,4 +27,4 @@ class OrderWriteonlySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ('user', 'products', )
+        fields = ('user', 'name', 'phone_number', 'address', 'products', )
