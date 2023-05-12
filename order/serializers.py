@@ -27,4 +27,9 @@ class OrderWriteonlySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ('user', 'name', 'phone_number', 'address', 'products', )
+        fields = ('user', 'name', 'phone_number', 'address', 'products', 'total', 'status', 'time_added',)
+        read_only_fields = ('total', 'status', 'time_added', )
+        extra_kwargs = {
+            'user': {'write_only': True},
+            'products': {'write_only': True},
+        }
